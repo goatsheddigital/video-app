@@ -1,32 +1,31 @@
-import { agent} from "~/lib/api";
+// display the top video
 
+import exp from "constants";
+import VideoGenerator from "../backend/generators/videoGenerator";
+
+
+// import backend generators video generator
+
+/// return the top video from the backend
+export async function TopVideo() {
+    const videos = await VideoGenerator();
+    return videos[0];
+
+}
 
 export default async function ForYou() {
+    const video = await TopVideo();
+    return (
+        <div>
+            <div className="my-2">
+                <a href={`/video/${video.uri}`}>{video.title}</a>
+                <div className="text-sm text-gray-500">{video.description}</div>
+                <image href={video.avatar} name={video.title} width={40} className="w-1 h-1 rounded-full" />
+                <div className="text-xs text-gray-400">{video.title}</div>
+            </div>
+        </div>
+    );
 
-   
-     // get user's popublar feeds
-
-
-    const {data: {feeds}} = await agent.app.bsky.unspecced.getPopularFeedGenerators({ limit: 1, });
-
-
-
-  return (
-    // fill the screen with the item returned
-    <div className="container mx-auto h-screen w-screen bg-gray-100 p-4 height-full overflow-y-auto flex flex-col h-100">
-      {feeds.map((feed) => (
-        <div  key={feed.uri} className="my-2 flex flex-col">
-          <a href={`/feed/${feed.uri}`}>{feed.displayName}</a>
-          <div className="text-sm text-gray-500">{feed.description}</div>
-          {/* details below */}
-          {/* avatar */}
-          <image  href={feed.avatar} name={feed.displayName} width={40} className="w-1 h-1 rounded-full" />
-          {/* description */}
-          {/* uri */}
-          <div className="text-xs text-gray-400">{feed.uri}</div>
-          {/* displayName */}
-        </div>)
-        )}
-    </div>
-  );
+// display the top video
 }
+
