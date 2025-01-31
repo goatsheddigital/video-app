@@ -5,7 +5,7 @@ import { agent } from "~/lib/api";
 
 export default async function PopularFeeds() {
     // get user's popular feeds
-    let {data: {feeds}} = await agent.app.bsky.unspecced.getPopularFeedGenerators({
+    const {data: {feeds}} = await agent.app.bsky.unspecced.getPopularFeedGenerators({
         limit: 100,
     });
 
@@ -18,7 +18,7 @@ export default async function PopularFeeds() {
                     <div className="text-sm text-gray-500">{feed.description}</div>
                     {/* details below */}
                     {/* avatar */}
-                    <img src={feed.avatar} alt={feed.displayName} width={40} className="w-1 h-1 rounded-full" />
+                    <image href={feed.avatar} name={feed.displayName} width={40} className="w-1 h-1 rounded-full" />
                     
                     {/* description */}
                     
